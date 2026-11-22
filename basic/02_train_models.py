@@ -7,7 +7,7 @@ Targets  (6): CHANGE over the step of Ca, C, Mg, calcite, dolomite, and the pH a
 Why the change and not the final value: dolomite barely changes in one step, so a model that predicts the final
 value looks perfect (R2 ~ 0.99) even if it learns nothing. The change is the part PHREEQC actually computes.
 
-Hyperparameters are fixed (not tuned on this data); a GridSearchCV is a natural next step.
+Hyperparameters are fixed (not tuned on this data).
 Split: 80 % of the cells for training, 20 % for testing; a cell and all its steps stay on the same side.
 
 Run:  python 02_train_models.py      (about 10 s)

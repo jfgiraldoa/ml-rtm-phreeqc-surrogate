@@ -77,9 +77,5 @@ cost of calling the model from another code are not included. Last digits can di
 - Decision tree and XGBoost were tried and left out of `basic/` to keep it simple (see `advanced/`).
   XGBoost needed `subsample=1.0` and still oscillated in calcite at the front.
 
-## Ideas for the next steps
-GridSearch on the new data, a column that is held out and untouched, the 2D case, and a richer chemistry where the
-model pays off more (here PHREEQC is already cheap, 0.1 ms per cell).
-
 ## License
 MIT, see `LICENSE`. The PHREEQC database `phreeqc.dat` is distributed by the USGS.
