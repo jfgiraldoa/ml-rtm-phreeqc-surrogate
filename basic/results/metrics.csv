@@ -1,0 +1,2 @@
+,fit_s,predict_ms_per_cell,R2_dCa,R2_dC,R2_dMg,R2_dcalcite,R2_ddolomite,R2_pH
+RandomForest,8.3,0.00367,0.9973,0.9973,0.9958,0.9973,0.9958,0.9999

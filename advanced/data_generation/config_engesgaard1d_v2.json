@@ -1,0 +1,85 @@
+{
+  "name": "engesgaard1d_v2",
+  "case": "engesgaard1d",
+  "note": "Same PhreeqcRM setup and react() call as a PhreeqcRM-based coupling (calcite equilibrium, dolomite kinetic with RATES, dt = 533 s, porosity 0.32, mol/L; SetConcentrations replaces only Ca, C, Cl, Mg). v2: 40-step chains. 'mix' chains mimic transport by random mixing with another cell and the inlet; 'front' chains advect/diffuse the totals along a 100-cell column (dx = 0.005 m, D dt/dx^2 = 1.339 for the benchmark, upwind advection + implicit diffusion) with the inlet at cell 0.",
+  "seed": 42,
+  "n_cells": 100,
+  "porosity": 0.32,
+  "time_step": 533.0,
+  "database": "database/phreeqc.dat",
+  "inlet": {
+    "Ca": 1e-10,
+    "C": 1e-10,
+    "Cl": 0.002,
+    "Mg": 0.001
+  },
+  "initial": {
+    "Ca": 0.000123,
+    "C": 0.000123,
+    "Cl": 1e-12,
+    "Mg": 1e-12,
+    "calcite": 0.0001220005,
+    "dolomite": 0.0
+  },
+  "neighbour_fraction_max": 0.5,
+  "chains": [
+    {
+      "type": "mix",
+      "inlet_fraction_max": 0.02,
+      "n_steps": 40,
+      "n_cells": 80
+    },
+    {
+      "type": "mix",
+      "inlet_fraction_max": 0.05,
+      "n_steps": 40,
+      "n_cells": 80
+    },
+    {
+      "type": "mix",
+      "inlet_fraction_max": 0.1,
+      "n_steps": 40,
+      "n_cells": 80
+    },
+    {
+      "type": "mix",
+      "inlet_fraction_max": 0.25,
+      "n_steps": 40,
+      "n_cells": 80
+    },
+    {
+      "type": "mix",
+      "inlet_fraction_max": 1.0,
+      "n_steps": 40,
+      "n_cells": 80
+    },
+    {
+      "type": "front",
+      "courant": 0.25,
+      "diffusion_number": 0.1,
+      "n_steps": 40,
+      "n_cells": 100
+    },
+    {
+      "type": "front",
+      "courant": 0.5,
+      "diffusion_number": 0.5,
+      "n_steps": 40,
+      "n_cells": 100
+    },
+    {
+      "type": "front",
+      "courant": 0.75,
+      "diffusion_number": 1.339,
+      "n_steps": 40,
+      "n_cells": 100
+    },
+    {
+      "type": "front",
+      "courant": 1.0,
+      "diffusion_number": 1.339,
+      "n_steps": 40,
+      "n_cells": 100
+    }
+  ]
+}

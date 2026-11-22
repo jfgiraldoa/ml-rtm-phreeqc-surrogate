@@ -1,0 +1,35 @@
+{
+  "name": "eq2d_equilibrium",
+  "note": "Same PhreeqcRM setup and react() call as a PhreeqcRM-based coupling (phreeqc.dat, mol/L, pe 4, porosity 0.3, SetConcentrations replaces only Ca, C, Cl, Mg; H, O and minerals stay in the cell). Cells evolve; each step mimics transport by mixing totals. One independent chain of n_cells cells per inlet_fraction_max value; rows = chains x n_cells x n_steps.",
+  "seed": 42,
+  "n_cells": 400,
+  "n_steps": 5,
+  "porosity": 0.3,
+  "time_step": 1.0,
+  "database": "database/phreeqc.dat",
+  "inlet": {
+    "Ca": 1e-10,
+    "C": 1e-10,
+    "Cl": 0.002,
+    "Mg": 0.001
+  },
+  "initial": {
+    "Ca": 0.000122,
+    "C": 0.000122,
+    "Cl": 1e-12,
+    "Mg": 1e-12,
+    "calcite": 2.14e-05,
+    "dolomite": 0.0
+  },
+  "mixing": {
+    "inlet_fraction_max_list": [
+      0.02,
+      0.05,
+      0.1,
+      0.25,
+      1.0
+    ],
+    "neighbour_fraction_max": 0.5
+  },
+  "case": "eq2d"
+}

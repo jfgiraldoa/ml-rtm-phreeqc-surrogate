@@ -1,0 +1,16 @@
+name: ml-rtm
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - numpy
+  - scipy
+  - pandas
+  - scikit-learn
+  - xgboost
+  - matplotlib
+  - joblib
+  - jupyter
+  - phreeqcrm
+  - pip
