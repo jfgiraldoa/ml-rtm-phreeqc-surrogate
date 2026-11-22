@@ -5,7 +5,7 @@ calcite in equilibrium, dolomite kinetic, dt = 533 s. A column has 100 cells and
 Each step has two parts, like in a reactive-transport code:
   (a) transport: move the totals Ca, C, Cl, Mg along the column (upwind advection + implicit diffusion, inlet water at cell 0)
   (b) chemistry: PHREEQC equilibrates every cell with the new totals; this is what the surrogate will learn.
-We run 12 columns with different flow speed (Courant number) and dispersion (diffusion number) so the cells see many
+We run 11 columns with different flow speed (Courant number) and dispersion (diffusion number) so the cells see many
 chemical states. The Engesgaard benchmark itself (Courant 1.0, diffusion number 1.339) is NOT in the training columns:
 step 4 uses it as a test the models have never seen.
 Output: data/engesgaard_columns.csv, one row per cell per step (44 000 rows).
