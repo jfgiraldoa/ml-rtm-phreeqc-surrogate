@@ -101,6 +101,23 @@ how many times it happened.
 
 ---
 
+## 05_limits.py — where the model stops working
+**Idea:** the forest learned the chemistry of one system. Here the benchmark is run again, changing one condition at a
+time, with PHREEQC and with the forest. The table printed at the end is the whole point of the exercise.
+
+| Case | What to expect |
+|---|---|
+| Same boundary (control) | small error (about 1-3 %) |
+| Other flow speed and dispersion | still small: the model only sees the state of a cell |
+| Boundary 0.5x or 3x | large error (20-77 %): new mixtures the model never saw |
+| Time step 2x | dolomite fails (about 50 %): `dt` is not an input and dolomite is kinetic |
+
+**Where to modify:** the list `CASES` (lines 32-38): change the inlet water, `dt`, Courant or diffusion number and see
+what breaks. A surrogate that works in other conditions has to be trained over many of them, with the changing values
+(`dt`, boundary composition, ...) added as inputs in `common.py`.
+
+---
+
 ## 03_plots.ipynb — figures with explanations
 Run it after steps 1, 2 and 4. It only reads results; it does not train anything.
 Cell 3: examples of training columns. Cell 5: predicted vs PHREEQC on test cells. Cell 7: the benchmark with the forest.
@@ -115,5 +132,6 @@ It saves `results/profiles.png` and `results/parity.png`. The last cell lists ex
 4. In `02`, swap the forest for XGBoost with `subsample=0.6`, then `1.0`: same R², very different step-4 result.
 5. In `01`, add columns to `COLUMNS` and re-run everything: do the errors fall?
 6. In `04`, change the benchmark to a column that was not in training: is the error the same?
-7. Put the forest only in the cells where `Mg < 1e-6` and PHREEQC elsewhere (a hybrid): how much accuracy do you keep,
+7. Run `05_limits.py`, then change `CASES` (e.g. a boundary 0.8x, or a time step 1.1x): where does it start to fail?
+8. Put the forest only in the cells where `Mg < 1e-6` and PHREEQC elsewhere (a hybrid): how much accuracy do you keep,
    and in what fraction of the cells do you still call PHREEQC?

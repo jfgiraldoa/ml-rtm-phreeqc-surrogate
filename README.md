@@ -6,6 +6,14 @@ Engesgaard calcite-dolomite column, and we test it inside a small transport loop
 
 The study is organised so that it can be reproduced step by step.
 
+## How to read this project
+The case is already solved with PHREEQC, so training a model on it is a **demonstration of the procedure**
+(generate data, train, validate inside a simulation), not a useful surrogate by itself. A surrogate pays off only
+when it is trained once over many conditions and then used on a *different* case: a larger or 2D/3D grid, many
+realisations, an expensive chemistry. The model here learns the chemistry of one system (one inlet water, one time
+step), so it does not transfer: step 5 changes the boundary, the time step and the flow, and shows how the error grows.
+Training over many conditions and then reproducing a case it has not seen is where the idea has weight.
+
 ## Repository layout
 ```
 .
@@ -17,6 +25,7 @@ The study is organised so that it can be reproduced step by step.
 │   ├── 02_train_models.py          trains the random forest -> results/ (~10 s)
 │   ├── 03_plots.ipynb              figures and explanations (already executed)
 │   ├── 04_profile_with_models.py   benchmark column with the forest instead of PHREEQC (~10 s)
+│   ├── 05_limits.py                changes boundary, time step and flow: shows where the model stops working (~30 s)
 │   ├── common.py                   how the model inputs are built (raw + log10 of the totals)
 │   ├── database/phreeqc.dat        PHREEQC database (USGS)
 │   ├── data/                       created by step 1 (not stored in git)
@@ -34,6 +43,7 @@ cd basic
 python 01_generate_data.py
 python 02_train_models.py
 python 04_profile_with_models.py
+python 05_limits.py
 jupyter notebook 03_plots.ipynb
 ```
 Everything is deterministic (fixed seeds): two full runs give identical numbers.
